@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -28,6 +28,15 @@ type OllamaResponse struct {
 func main(){
 	 r := gin.Default()
 
+
+	 r.Use(cors.New(cors.Config{
+    	AllowOrigins:     []string{"http://localhost:5173"}, 
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Accept"},
+		AllowCredentials: true,
+	}))
+	
+	
 	r.POST("/api/ask",func(c *gin.Context) {
 
 		var req AskRequest
