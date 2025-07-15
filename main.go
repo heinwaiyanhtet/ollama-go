@@ -5,8 +5,11 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+	"os"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 type AskRequest struct {
@@ -54,7 +57,13 @@ func main(){
 
 		ollamaBody, _ := json.Marshal(ollamaReq)
 
-		resp, err := http.Post("http://localhost:11434/api/generate", "application/json", bytes.NewBuffer(ollamaBody));
+		 err := godotenv.Load()
+		if err != nil {
+			panic("Error loading .env file")
+		}
+		modelEndpoint := os.Getenv("MODEL_ENDPOINT")
+
+		resp, err := http.Post(modelEndpoint+"/api/generate", "application/json", bytes.NewBuffer(ollamaBody));
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to contact Ollama"})
