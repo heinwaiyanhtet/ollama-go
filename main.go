@@ -26,17 +26,18 @@ type OllamaResponse struct {
 
 
 func main(){
-	 r := gin.Default()
+
+	r := gin.Default()
 
 
-	 r.Use(cors.New(cors.Config{
+	r.Use(cors.New(cors.Config{
     	AllowOrigins:     []string{"http://localhost:5173"}, 
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accept"},
 		AllowCredentials: true,
 	}))
 	
-	
+
 	r.POST("/api/ask",func(c *gin.Context) {
 
 		var req AskRequest
@@ -88,5 +89,8 @@ func main(){
             "message": "pong",
         })
     })
+
+
+
     r.Run(":8080")
 }
