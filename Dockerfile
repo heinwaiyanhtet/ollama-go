@@ -9,7 +9,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o app ./cmd/app
 # Final image
 FROM alpine:latest
 WORKDIR /app
-COPY --from=builder /src/app ./app
+COPY --from=builder /OLLAMA-GO ./app
 # COPY .env ./
 EXPOSE 8080
 CMD ["./app"]
