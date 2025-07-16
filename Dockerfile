@@ -8,6 +8,8 @@ RUN CGO_ENABLED=0 go build -o /app/server .
 
 # Final minimal image
 FROM gcr.io/distroless/static
-COPY --from=builder /app/server /server
+WORKDIR /app
+COPY --from=builder /app/server ./server
+COPY .env .
 EXPOSE 8080
-ENTRYPOINT ["/server"]
+ENTRYPOINT ["./server"]
