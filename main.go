@@ -57,7 +57,8 @@ func main(){
 
 		ollamaBody, _ := json.Marshal(ollamaReq)
 
-		 err := godotenv.Load()
+		err := godotenv.Load()
+		
 		if err != nil {
 			panic("Error loading .env file")
 		}
