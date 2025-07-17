@@ -43,15 +43,15 @@ jobs:
         with:
           token: ${{ secrets.DO_API_TOKEN }}
 
-      # - name: Set up kubectl
-      #   uses: azure/setup-kubectl@v3
-      #   with:
-      #     version: 'latest'
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
 
-      # - name: Configure kubeconfig
-      #   run: doctl kubernetes cluster kubeconfig save ${{ secrets.DOKS_CLUSTER }}
+      - name: Configure kubeconfig
+        run: doctl kubernetes cluster kubeconfig save ${{ secrets.DOKS_CLUSTER }}
 
-      # - name: Deploy to Kubernetes
-      #   run: |
-      #     kubectl set image deployment/ollama-backend ollama-backend=${IMAGE} -n ${{ secrets.K8S_NAMESPACE }}
-      #     kubectl rollout status deployment/ollama-backend -n ${{ secrets.K8S_NAMESPACE }}
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl set image deployment/ollama-backend ollama-backend=${IMAGE} -n ${{ secrets.K8S_NAMESPACE }}
+          kubectl rollout status deployment/ollama-backend -n ${{ secrets.K8S_NAMESPACE }}
